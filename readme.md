@@ -15,7 +15,7 @@ $ brew cask install dockertoolbox --appdir=/Applications
 This is just a clean VM where the other docker containers will sit on.
 
 ```sh
-$ docker-machine create quickstart --drivier virtualbox
+$ docker-machine create quickstart --driver virtualbox
 ```
 
 Takes about 1 min.
@@ -68,7 +68,7 @@ For available containers, read the [official document from LaraDock](https://git
 `eval` part is important. It tells `docker-compose` that the base infra(VM) we will use is `quickstart`.
 
 ```sh
-~/quickstart $  cd laradock
+~/quickstart $ cd laradock
 ~/quickstart/laradock $ eval $(docker-machine env quickstart)
 ~/quickstart/laradock $ docker-compose up -d nginx mysql
 ```
@@ -124,3 +124,20 @@ Open `http://quickstart.app`.
 ![](quickstart_up_running.png)
 
 That's it.
+
+# Experimental attempts
+
+## 8. Redis
+
+```sh
+~/quickstart $ git checkout feature/redis
+~/quickstart $ cd laradock
+~/quickstart/laradock $ docker-compose up -d nginx mysql redis
+```
+
+```sh
+~/quickstart/laradock $ docker-compose run workspace bash
+root@c77742dc4437:/var/www/laravel# php artisan tinker
+>>> \Cache::store('redis')->put('foo', 'bar', 10);
+=> null
+```
