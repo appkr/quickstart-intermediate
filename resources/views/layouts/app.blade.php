@@ -41,7 +41,11 @@
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Task List
+                    <span class="text-danger">
+                        @<strong>{{ gethostname() }}</strong>
+                    </span>
                 </a>
+
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
